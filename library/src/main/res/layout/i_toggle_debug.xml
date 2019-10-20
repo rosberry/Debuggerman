@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:orientation="horizontal"
+    android:paddingBottom="8dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="8dp"
+    android:textSize="18sp">
+
+    <androidx.appcompat.widget.AppCompatTextView android:id="@+id/textDebugTitle"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:layout_weight="1"
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="14sp"
+        app:autoSizeMinTextSize="8sp"
+        app:autoSizeTextType="uniform"
+        tools:text="Some textSome textSome text" />
+
+    <androidx.appcompat.widget.SwitchCompat android:id="@+id/switchValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|center_vertical"
+        app:switchPadding="8dp"
+        app:trackTint="@color/boxStokeColorHovered" />
+</LinearLayout>
