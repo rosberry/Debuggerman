@@ -46,7 +46,7 @@ class DebugDialogFragment : DialogFragment(), DebugView {
         private const val CHANNEL_ID = "debug dialog"
         private const val ACTION_OPEN = BuildConfig.LIBRARY_PACKAGE_NAME + ".open_debug"
 
-        fun openFromNotification(context: Context, clazz: Class<*>) {
+        fun showNotification(context: Context, clazz: Class<*>) {
             val nm = NotificationManagerCompat.from(context)
             val intent = Intent(context, clazz).apply {
                 action = ACTION_OPEN
