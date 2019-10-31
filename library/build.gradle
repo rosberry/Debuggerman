@@ -25,8 +25,10 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.1.0'
+    compileOnly fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    compileOnly 'androidx.appcompat:appcompat:1.1.0'
+    compileOnly 'androidx.core:core-ktx:1.1.0'
+    compileOnly 'com.rosberry.android:AbstractRecycler:1.0.0@aar'
+    compileOnly 'androidx.recyclerview:recyclerview:1.0.0'
 }
