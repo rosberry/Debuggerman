@@ -7,26 +7,18 @@
 package com.rosberry.android.debuggerman.ui
 
 import android.app.Dialog
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.rosberry.abstractrecycler.AbstractItem
-import com.rosberry.android.debuggerman.BuildConfig
+import com.rosberry.android.debuggerman.DebugAgent
 import com.rosberry.android.debuggerman.R
-import com.rosberry.android.debuggerman.presentation.Debug
 import com.rosberry.android.debuggerman.presentation.DebugPresenter
 import com.rosberry.android.debuggerman.presentation.DebugView
 import kotlinx.android.synthetic.main.df_debug.*
@@ -38,56 +30,11 @@ import kotlinx.android.synthetic.main.df_debug.view.*
 class DebugDialogFragment : DialogFragment(), DebugView {
 
     companion object {
-
-        var supportedItems: List<Debug> = listOf()
-
         private const val TAG = "DebugDialogFragment"
-        private const val NOTIFICATION_ID = 100
-        private const val CHANNEL_ID = "debug dialog"
-        private const val ACTION_OPEN = BuildConfig.LIBRARY_PACKAGE_NAME + ".open_debug"
-
-        fun showNotification(context: Context, clazz: Class<*>) {
-            val nm = NotificationManagerCompat.from(context)
-            val intent = Intent(context, clazz).apply {
-                action = ACTION_OPEN
-                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-            }
-            val contentIntent = PendingIntent.getActivity(context, 0, intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT)
-
-            createNotificationChannel(nm)
-
-            val notification = NotificationCompat.Builder(context, CHANNEL_ID)
-                .setContentTitle("Debug")
-                .setContentText("Click to open debug dialog")
-                .setPriority(NotificationCompat.PRIORITY_MAX)
-                .setVisibility(NotificationCompat.VISIBILITY_SECRET)
-                .setSmallIcon(R.drawable.ic_bug_report_black_24dp)
-                .setContentIntent(contentIntent)
-                .build()
-
-            nm.notify(NOTIFICATION_ID, notification)
-        }
 
         fun onNewIntent(i: Intent?, supportFragmentManager: FragmentManager) {
-            if (i != null && i.action == ACTION_OPEN) newInstance().show(supportFragmentManager, TAG)
-
-        }
-
-        private fun newInstance(): DebugDialogFragment {
-            return DebugDialogFragment()
-        }
-
-        private fun createNotificationChannel(nm: NotificationManagerCompat) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val name = "Debug screen"
-                val description = "Debug app"
-                val importance = NotificationManager.IMPORTANCE_HIGH
-                val channel = NotificationChannel(CHANNEL_ID, name, importance)
-
-                channel.description = description
-
-                nm.createNotificationChannel(channel)
+            if (i != null && i.action == DebugAgent.ACTION_OPEN) {
+                DebugDialogFragment().show(supportFragmentManager, TAG)
             }
         }
     }

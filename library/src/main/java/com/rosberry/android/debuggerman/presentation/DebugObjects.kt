@@ -11,7 +11,7 @@ package com.rosberry.android.debuggerman.presentation
  */
 sealed class Debug(val title: String)
 
-class ToggleDebug(title: String, val getValue: () -> Boolean, val action: (Boolean) -> Unit) : Debug(title)
+class ToggleDebug(title: String, val initialValue: () -> Boolean, val action: (Boolean) -> Unit) : Debug(title)
 
 class ButtonDebug(title: String, val action: () -> Unit) : Debug(title)
 

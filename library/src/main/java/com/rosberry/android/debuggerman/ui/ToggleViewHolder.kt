@@ -32,6 +32,6 @@ internal class ToggleViewHolder(view: View) : AbstractViewHolder<ToggleDebugItem
             .text = item.data.title
 
         itemView.findViewById<SwitchCompat>(R.id.switchValue)
-            .isChecked = item.data.getValue.invoke()
+            .isChecked = item.data.initialValue.invoke()
     }
 }
