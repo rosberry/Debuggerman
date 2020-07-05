@@ -27,6 +27,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         rb_red.isChecked = true
+        square.setBackgroundColor(Color.RED)
         rg.setOnCheckedChangeListener { _, checkedId ->
             val color: Int = when (checkedId) {
                 R.id.rb_green -> Color.GREEN

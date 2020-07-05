@@ -29,10 +29,6 @@ class DebugPresenter {
         view?.dismiss()
     }
 
-    fun clickApply() {
-
-    }
-
     private fun convertDataToItem(data: Debug): AbstractItem {
         return when (data) {
             is ButtonDebug -> ButtonDebugItem(data)

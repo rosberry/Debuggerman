@@ -93,6 +93,7 @@ class DebugAgent : Service() {
             val importance = NotificationManager.IMPORTANCE_HIGH
             val channel = NotificationChannel(CHANNEL_ID, name, importance)
 
+            channel.setSound(null, null)
             channel.description = description
 
             nm.createNotificationChannel(channel)

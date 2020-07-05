@@ -9,7 +9,6 @@ import com.rosberry.android.debuggerman.ui.DebugDialogFragment
 import com.rosberry.debuggerman.sample.BuildConfig
 import com.rosberry.debuggerman.sample.R
 import com.rosberry.debuggerman.sample.data.PrefManager
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         if (BuildConfig.DEBUG) setupDebugAgent()
 
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
 
         prefs = PrefManager(this)
 
@@ -37,7 +35,6 @@ class MainActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
 
-        // todo resolve crash issue
         if (BuildConfig.DEBUG) DebugDialogFragment.onNewIntent(intent, supportFragmentManager)
     }
 
@@ -51,6 +48,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupDebugAgent() {
         DebugAgent.start(this)
-        DebugAgent.place(ButtonDebug("Clear prefs") { prefs.clearAll() })
+        DebugAgent.place(ButtonDebug("Reset onboarding", toastMessage = "Preferences cleared") { prefs.clearAll() })
     }
 }

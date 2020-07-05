@@ -14,8 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView
 import com.rosberry.abstractrecycler.AbstractItem
 import com.rosberry.android.debuggerman.DebugAgent
 import com.rosberry.android.debuggerman.R
@@ -51,7 +49,6 @@ class DebugDialogFragment : DialogFragment(), DebugView {
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, state: Bundle?): View? {
         return inflater.inflate(R.layout.df_debug, parent, false)
             .apply {
-                this.buttonApply.setOnClickListener { presenter.clickApply() }
                 this.buttonCancel.setOnClickListener { presenter.clickDismiss() }
             }
     }
@@ -59,7 +56,6 @@ class DebugDialogFragment : DialogFragment(), DebugView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerDebug.setHasFixedSize(true)
-        recyclerDebug.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
         recyclerDebug.adapter = adapter
     }
 
