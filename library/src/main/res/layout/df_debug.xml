@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/contanerDebug"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/contanerDebug"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="30dp"
     android:background="@android:color/white">
 
-    <View android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <androidx.appcompat.widget.AppCompatTextView android:id="@+id/textDebugTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"
-        android:text="Debug dialog"
-        android:textSize="22dp"
-        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:text="@string/debug_dialog"
         android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,29 +23,29 @@
     <androidx.appcompat.widget.AppCompatButton android:id="@+id/buttonCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
+        android:text="@string/cancel"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/buttonApply" />
+        app:layout_constraintRight_toLeftOf="@+id/buttonApply"
+        app:layout_constraintTop_toBottomOf="@id/recyclerDebug" />
 
     <androidx.appcompat.widget.AppCompatButton android:id="@+id/buttonApply"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Apply"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/apply"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintLeft_toRightOf="@+id/buttonCancel"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/buttonCancel" />
 
     <androidx.recyclerview.widget.RecyclerView android:id="@+id/recyclerDebug"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        app:reverseLayout="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@+id/textDebugTitle"
+        app:reverseLayout="false"
         app:stackFromEnd="false" />
 </androidx.constraintlayout.widget.ConstraintLayout>
