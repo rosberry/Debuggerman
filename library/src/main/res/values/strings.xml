@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">debuggerman</string>
-    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
     <string name="apply">Apply</string>
     <string name="debug_dialog">Debug dialog</string>
 </resources>

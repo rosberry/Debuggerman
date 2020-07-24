@@ -4,9 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.rosberry.android.debuggerman.DebugAgent
+import com.rosberry.android.debuggerman.extensions.ifDebug
 import com.rosberry.android.debuggerman.presentation.ButtonDebug
-import com.rosberry.android.debuggerman.ui.DebugDialogFragment
-import com.rosberry.debuggerman.sample.BuildConfig
 import com.rosberry.debuggerman.sample.R
 import com.rosberry.debuggerman.sample.data.PrefManager
 
@@ -17,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (BuildConfig.DEBUG) setupDebugAgent()
+        ifDebug { setupDebugAgent() }
 
         setContentView(R.layout.activity_main)
 
@@ -35,7 +34,17 @@ class MainActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
 
-        if (BuildConfig.DEBUG) DebugDialogFragment.onNewIntent(intent, supportFragmentManager)
+        ifDebug {  DebugAgent.onNewIntent(intent, supportFragmentManager) }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        ifDebug {
+            // todo handle system of actions' tag
+            DebugAgent.remove("MainActivity_reset_onboarding")
+            DebugAgent.stop()
+        }
     }
 
     fun closeOnBoarding() {
@@ -48,6 +57,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupDebugAgent() {
         DebugAgent.start(this)
-        DebugAgent.place(ButtonDebug("Reset onboarding", toastMessage = "Preferences cleared") { prefs.clearAll() })
+        DebugAgent.place(ButtonDebug(
+                tag = "MainActivity_reset_onboarding",
+                title = "Reset onboarding",
+                toastMessage = "Preferences cleared"
+        ) { prefs.clearAll() })
     }
 }

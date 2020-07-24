@@ -11,7 +11,9 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.fragment.app.FragmentManager
 import com.rosberry.android.debuggerman.presentation.Debug
+import com.rosberry.android.debuggerman.ui.DebugDialogFragment
 
 /**
  * @author mmikhailov on 20.03.2020.
@@ -22,7 +24,7 @@ class DebugAgent : Service() {
         var host: Activity? = null
         var supportedItems = mutableListOf<Debug>()
 
-        internal const val ACTION_OPEN = BuildConfig.LIBRARY_PACKAGE_NAME + ".open_debug"
+        private const val ACTION_OPEN = BuildConfig.LIBRARY_PACKAGE_NAME + ".open_debug"
         private const val ACTION_START = BuildConfig.LIBRARY_PACKAGE_NAME + ".start_agent"
 
         private const val TAG = "DebugAgent"
@@ -36,12 +38,33 @@ class DebugAgent : Service() {
             })
         }
 
+        fun stop() {
+            if (host == null) {
+                Log.w(TAG, "Debug Agent is not running")
+                return
+            }
+
+            host!!.stopService(Intent(host!!.applicationContext, DebugAgent::class.java))
+            host = null
+        }
+
         fun place(action: Debug) {
             supportedItems.add(action)
         }
 
-        fun remove(action: Debug) {
-            supportedItems.remove(action)
+        fun remove(tag: String) {
+            val index = supportedItems.indexOfFirst { it.tag == tag }
+            supportedItems.removeAt(index)
+        }
+
+        fun onNewIntent(i: Intent?, fm: FragmentManager) {
+            if (i != null && i.action == ACTION_OPEN) {
+                val fragmentTag = "DebugDialogFragment"
+
+                if (fm.findFragmentByTag(fragmentTag) == null) {
+                    DebugDialogFragment().show(fm, fragmentTag)
+                }
+            }
         }
     }
 

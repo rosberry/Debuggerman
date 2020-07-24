@@ -7,15 +7,12 @@
 package com.rosberry.android.debuggerman.ui
 
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentManager
 import com.rosberry.abstractrecycler.AbstractItem
-import com.rosberry.android.debuggerman.DebugAgent
 import com.rosberry.android.debuggerman.R
 import com.rosberry.android.debuggerman.presentation.DebugPresenter
 import com.rosberry.android.debuggerman.presentation.DebugView
@@ -26,16 +23,6 @@ import kotlinx.android.synthetic.main.df_debug.view.*
  * @author Alexei Korshun on 2019-10-20.
  */
 class DebugDialogFragment : DialogFragment(), DebugView {
-
-    companion object {
-        private const val TAG = "DebugDialogFragment"
-
-        fun onNewIntent(i: Intent?, supportFragmentManager: FragmentManager) {
-            if (i != null && i.action == DebugAgent.ACTION_OPEN) {
-                DebugDialogFragment().show(supportFragmentManager, TAG)
-            }
-        }
-    }
 
     private val presenter: DebugPresenter = DebugPresenter()
 
