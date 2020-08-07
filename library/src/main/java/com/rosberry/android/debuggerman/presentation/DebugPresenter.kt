@@ -7,7 +7,7 @@
 package com.rosberry.android.debuggerman.presentation
 
 import com.rosberry.abstractrecycler.AbstractItem
-import com.rosberry.android.debuggerman.ui.DebugDialogFragment
+import com.rosberry.android.debuggerman.DebugAgent
 
 /**
  * @author Alexei Korshun on 2019-10-20.
@@ -18,7 +18,7 @@ class DebugPresenter {
 
     fun onAttach(view: DebugView) {
         this.view = view
-        view.setDebugItems(DebugDialogFragment.supportedItems.map { data -> convertDataToItem(data) })
+        view.setDebugItems(DebugAgent.supportedItems.map { data -> convertDataToItem(data) })
     }
 
     fun onDetach() {
@@ -27,10 +27,6 @@ class DebugPresenter {
 
     fun clickDismiss() {
         view?.dismiss()
-    }
-
-    fun clickApply() {
-
     }
 
     private fun convertDataToItem(data: Debug): AbstractItem {

@@ -9,10 +9,10 @@ package com.rosberry.android.debuggerman.presentation
 /**
  * @author Alexei Korshun on 2019-10-20.
  */
-sealed class Debug(val title: String)
+sealed class Debug(val tag: String, val title: String)
 
-class ToggleDebug(title: String, val getValue: () -> Boolean, val action: (Boolean) -> Unit) : Debug(title)
+class ToggleDebug(tag: String, title: String, val initialValue: () -> Boolean, val action: (Boolean) -> Unit) : Debug(tag, title)
 
-class ButtonDebug(title: String, val action: () -> Unit) : Debug(title)
+class ButtonDebug(tag: String, title: String, val toastMessage: String? = null, val action: () -> Unit) : Debug(tag, title)
 
-class TextDebug(title: String): Debug(title)
+class TextDebug(tag: String, title: String): Debug(tag, title)
